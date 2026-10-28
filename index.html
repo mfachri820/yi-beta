@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Young Investor Unpad Beta</title>
+  <meta name="description" content="Young Investor Universitas Padjadjaran: komunitas mahasiswa yang belajar pasar modal bersama.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER: logo + navigasi ===== -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">YI</span>
+        <span class="brand-name">Young Investor<small>Universitas Padjadjaran</small></span>
+      </a>
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#tentang">Tentang</a>
+        <a href="#program">Program</a>
+        <a href="#simulasi">Simulasi</a>
+        <a href="#gabung">Gabung</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO: kalimat utama + roset ===== -->
+    <section class="band hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="beta-tag">Versi beta</p>
+          <h1>Belajar pasar modal bareng teman satu kampus.</h1>
+          <p class="lead">
+            Young Investor adalah komunitas mahasiswa Universitas Padjadjaran yang belajar
+            investasi pelan-pelan: kenal instrumennya dulu, latihan membaca data, lalu praktik
+            dengan modal kecil.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#program">Lihat program</a>
+            <a class="btn btn-ghost" href="#simulasi">Coba simulasi</a>
+          </div>
+        </div>
+
+        <!-- Roset bergaya pola pengaman uang kertas. Digambar oleh script.js -->
+        <figure class="seal">
+          <div class="seal-box">
+            <canvas id="roset" aria-hidden="true"></canvas>
+            <span class="seal-mark" aria-hidden="true">YI</span>
+          </div>
+          <figcaption class="serial">YI 2026 000001</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== TENTANG ===== -->
+    <section id="tentang" class="band">
+      <div class="wrap about-grid">
+        <h2>Tentang kami</h2>
+        <div class="about-text">
+          <p>
+            Young Investor bernaung di Galeri Investasi BEI Universitas Padjadjaran. Kami
+            mengadakan kelas, diskusi, dan pelatihan supaya mahasiswa dari jurusan mana pun bisa
+            memahami pasar modal tanpa harus jago hitung lebih dulu.
+          </p>
+          <dl class="facts">
+            <div><dt>Fokus</dt><dd>Pasar modal dan literasi keuangan</dd></div>
+            <div><dt>Basis</dt><dd>Kampus Jatinangor</dd></div>
+            <div><dt>Instagram</dt><dd>@yi.unpad</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROGRAM: daftar baris, bukan kartu ===== -->
+    <!-- Ganti isi program di bawah dengan program asli YI -->
+    <section id="program" class="band">
+      <div class="wrap">
+        <h2>Program</h2>
+        <ul class="program-list">
+          <li class="program">
+            <h3>Kelas Dasar Pasar Modal</h3>
+            <p>Saham, reksa dana, dan obligasi dijelaskan dari nol, lengkap dengan cara membuka rekening efek.</p>
+            <span class="when">Tiap semester</span>
+          </li>
+          <li class="program">
+            <h3>Diskusi Saham</h3>
+            <p>Membedah satu emiten bersama: laporan keuangan, berita terbaru, dan valuasi sederhana.</p>
+            <span class="when">Mingguan</span>
+          </li>
+          <li class="program">
+            <h3>Digital System Lab</h3>
+            <p>Pelatihan internal Technology Operations tentang analisis data dan pembuatan website dengan bantuan AI.</p>
+            <span class="when">28–29 Okt 2026</span>
+          </li>
+          <li class="program">
+            <h3>Kunjungan dan Seminar</h3>
+            <p>Berkunjung ke perusahaan sekuritas dan mengundang praktisi pasar modal ke kampus.</p>
+            <span class="when">Per semester</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== SIMULASI: alat hitung kecil (JavaScript) ===== -->
+    <section id="simulasi" class="band band-alt">
+      <div class="wrap">
+        <h2>Simulasi nabung saham rutin</h2>
+        <p class="section-lead">
+          Kalau kamu menyisihkan uang tiap bulan dan hasil investasinya rata-rata sekian persen
+          per tahun, kira-kira jadi berapa? Ubah angkanya, hasilnya langsung berubah.
+        </p>
+
+        <div class="calc">
+          <form id="form-simulasi" class="calc-form" novalidate>
+            <div class="field">
+              <label for="awal">Setoran awal</label>
+              <div class="input-wrap">
+                <span aria-hidden="true">Rp</span>
+                <input id="awal" name="awal" type="number" inputmode="numeric" min="0" step="50000" value="500000">
+              </div>
+              <p class="hint" id="awal-teks">Rp 500.000</p>
+            </div>
+
+            <div class="field">
+              <label for="bulanan">Setoran per bulan</label>
+              <div class="input-wrap">
+                <span aria-hidden="true">Rp</span>
+                <input id="bulanan" name="bulanan" type="number" inputmode="numeric" min="0" step="50000" value="300000">
+              </div>
+              <p class="hint" id="bulanan-teks">Rp 300.000</p>
+            </div>
+
+            <div class="field">
+              <label for="imbal">Asumsi imbal hasil per tahun</label>
+              <div class="input-wrap">
+                <input id="imbal" name="imbal" type="number" inputmode="decimal" min="0" max="30" step="0.5" value="8">
+                <span aria-hidden="true">%</span>
+              </div>
+              <p class="hint">Angka asumsi, antara 0 sampai 30.</p>
+            </div>
+
+            <div class="field">
+              <label for="tahun">Lama menabung</label>
+              <input id="tahun" name="tahun" type="range" min="1" max="30" value="5">
+              <p class="hint"><output id="tahun-teks" for="tahun">5 tahun</output></p>
+            </div>
+
+            <p class="error" id="pesan-error" role="alert" hidden></p>
+          </form>
+
+          <div class="calc-result" aria-live="polite">
+            <dl class="figures">
+              <div class="figure-main">
+                <dt>Perkiraan nilai akhir</dt>
+                <dd id="hasil-akhir">Rp 0</dd>
+              </div>
+              <div>
+                <dt>Total yang kamu setor</dt>
+                <dd id="hasil-setor">Rp 0</dd>
+              </div>
+              <div>
+                <dt>Perkiraan pertumbuhan</dt>
+                <dd id="hasil-tumbuh" class="gain">Rp 0</dd>
+              </div>
+            </dl>
+
+            <p class="chart-cap" id="grafik-cap">Nilai di akhir setiap tahun.</p>
+            <div class="grafik" id="grafik" role="img" aria-label="Grafik nilai investasi per tahun"></div>
+            <div class="sumbu" id="sumbu" aria-hidden="true"></div>
+
+            <ul class="legend">
+              <li><span class="swatch swatch-setor"></span>Uang yang kamu setor</li>
+              <li><span class="swatch swatch-tumbuh"></span>Pertumbuhan</li>
+            </ul>
+
+            <p class="disclaimer">
+              Ini simulasi dengan imbal hasil tetap. Harga saham naik-turun, jadi hasil nyata bisa
+              lebih tinggi atau lebih rendah. Bukan rekomendasi untuk membeli atau menjual efek apa pun.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GABUNG ===== -->
+    <section id="gabung" class="band">
+      <div class="wrap join-grid">
+        <div>
+          <h2>Mau ikut belajar?</h2>
+          <p class="section-lead">Info pendaftaran dan kegiatan terbaru kami umumkan lewat Instagram.</p>
+          <a class="btn btn-primary" href="https://www.instagram.com/yi.unpad/" target="_blank" rel="noopener">Buka Instagram @yi.unpad</a>
+        </div>
+        <address class="address">
+          <strong>Sekretariat</strong>
+          Jl. Raya Bandung Sumedang KM.21, Hegarmanah,<br>
+          Kec. Jatinangor, Kabupaten Sumedang,<br>
+          Jawa Barat 45363
+        </address>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Young Investor Universitas Padjadjaran.</p>
+      <p>Versi beta. Sebagian isi masih contoh untuk pelatihan Digital System Lab.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

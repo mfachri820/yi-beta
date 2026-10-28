@@ -1,0 +1,422 @@
+/* =========================================================
+   Young Investor Unpad - style.css (versi beta)
+   Tata letak: konten rata kiri, lebar maksimal 1080px.
+   Hero dua kolom (teks + roset), program berupa daftar baris,
+   simulasi dua kolom (form + hasil). Di HP semuanya jadi satu kolom.
+   ========================================================= */
+
+/* ---------- 1. Token warna & huruf ----------
+   Nuansa diambil dari uang kertas: kertas pucat, tinta biru,
+   pola garis halus. Hijau hanya dipakai untuk "pertumbuhan". */
+:root {
+  --paper: #FAFBFD;      /* latar halaman */
+  --surface: #FFFFFF;    /* latar form */
+  --band: #EDF2F9;       /* latar bagian simulasi */
+  --ink: #132A4A;        /* teks utama */
+  --ink-soft: #4C5E75;   /* teks sekunder */
+  --rule: #CDD6DD;       /* garis pemisah */
+  --note-blue: #2B5CA6;  /* pola roset, fokus, aksen */
+  --deposit: #8FA6C4;    /* batang "uang disetor" */
+  --gain: #0B7A4D;       /* pertumbuhan (naik = hijau) */
+  --on-ink: #FAFBFD;     /* teks di atas tombol gelap */
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --radius: 4px;
+}
+
+/* Mode gelap: hanya warnanya yang berubah */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0F1A2B;
+    --surface: #15233A;
+    --band: #132036;
+    --ink: #E6ECF3;
+    --ink-soft: #A7B4C5;
+    --rule: #2A3B54;
+    --note-blue: #82A9EA;
+    --deposit: #4F6C95;
+    --gain: #3DC28A;
+    --on-ink: #0F1A2B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0F1A2B;
+  --surface: #15233A;
+  --band: #132036;
+  --ink: #E6ECF3;
+  --ink-soft: #A7B4C5;
+  --rule: #2A3B54;
+  --note-blue: #82A9EA;
+  --deposit: #4F6C95;
+  --gain: #3DC28A;
+  --on-ink: #0F1A2B;
+  color-scheme: dark;
+}
+
+/* ---------- 2. Dasar ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* Judul besar memakai Archivo versi lebar, seperti angka pada uang kertas */
+h1, h2 {
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: clamp(2.25rem, 1.1rem + 4.4vw, 4.25rem); }
+h2 { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem); }
+h3 { font-size: 1.25rem; font-weight: 650; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--note-blue);
+  outline-offset: 3px;
+}
+
+/* Pembungkus konten: lebar maksimal + jarak tepi minimal 16px */
+.wrap {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Setiap bagian halaman */
+.band { padding-block: clamp(48px, 7vw, 88px); }
+.band-alt { background: var(--band); }
+
+.section-lead {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  margin: 0.75rem 0 2rem;
+}
+
+/* ---------- 3. Tombol ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+  line-height: 1.2;
+}
+.btn-primary { background: var(--ink); color: var(--on-ink); }
+.btn-primary:hover { background: var(--note-blue); border-color: var(--note-blue); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--surface); }
+
+/* ---------- 4. Header ---------- */
+.site-header { border-bottom: 1px solid var(--rule); }
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-block: 1rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.brand-name small {
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+.nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-weight: 550;
+}
+.nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- 5. Hero ---------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+.hero-text { min-width: 0; }
+.beta-tag {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  padding: 0.15rem 0.65rem;
+  border: 1.5px dashed var(--note-blue);
+  border-radius: 999px;
+  color: var(--note-blue);
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+.lead {
+  max-width: 52ch;
+  margin: 1.25rem 0 2rem;
+  font-size: 1.1875rem;
+  color: var(--ink-soft);
+}
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.seal { margin: 0; justify-self: center; width: 100%; max-width: 420px; }
+.seal-box { position: relative; width: 100%; aspect-ratio: 1; max-width: 100%; }
+.seal-box canvas { display: block; width: 100%; height: 100%; }
+.seal-mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1rem + 2.5vw, 2.75rem);
+  color: var(--ink);
+}
+/* Nomor seri, seperti di pojok uang kertas */
+.serial {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--note-blue);
+}
+
+/* ---------- 6. Tentang ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 1.5rem 3rem;
+}
+.about-text { min-width: 0; }
+.about-text p { margin: 0 0 1.5rem; max-width: 60ch; }
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+.facts div { border-top: 1.5px solid var(--ink); padding-top: 0.6rem; }
+.facts dt { font-size: 0.875rem; color: var(--ink-soft); }
+.facts dd { margin: 0.15rem 0 0; font-weight: 650; }
+
+/* ---------- 7. Program ---------- */
+.program-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  border-top: 1.5px solid var(--ink);
+}
+.program {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto;
+  gap: 0.5rem 2rem;
+  align-items: baseline;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.program p { margin: 0; max-width: 60ch; color: var(--ink-soft); }
+.when {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--note-blue);
+}
+
+/* ---------- 8. Simulasi ---------- */
+.calc {
+  display: grid;
+  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  gap: 2rem 3rem;
+  align-items: start;
+}
+.calc-form {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.field label { display: block; font-weight: 650; margin-bottom: 0.4rem; }
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+  border: 1.5px solid var(--ink-soft);
+  border-radius: var(--radius);
+}
+.input-wrap:focus-within { outline: 2px solid var(--note-blue); outline-offset: 2px; }
+.input-wrap span { padding-inline: 0.75rem; color: var(--ink-soft); font-weight: 650; }
+.input-wrap input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.input-wrap input:focus { outline: none; }
+.input-wrap span + input { padding-left: 0; }
+input[type="range"] { width: 100%; accent-color: var(--note-blue); }
+.hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.hint output { font-weight: 650; color: var(--ink); }
+.error { margin: 0; color: var(--ink); font-weight: 650; border-left: 3px solid var(--note-blue); padding-left: 0.75rem; }
+
+.calc-result { min-width: 0; }
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0;
+}
+.figures dt { font-size: 0.875rem; color: var(--ink-soft); }
+.figures dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.375rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.figure-main {
+  grid-column: 1 / -1;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.figures .figure-main dd {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3rem);
+  line-height: 1.05;
+}
+.figures .gain { color: var(--gain); }
+
+/* Grafik batang: tinggi tiap batang = nilai / nilai tertinggi */
+.chart-cap { margin: 1.75rem 0 0.5rem; font-size: 0.875rem; color: var(--ink-soft); }
+.grafik {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 11rem;
+  border-bottom: 1.5px solid var(--ink);
+}
+.kolom { flex: 1 1 0; min-width: 0; height: 100%; display: flex; align-items: flex-end; }
+.batang {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px 2px 0 0;
+  overflow: hidden;
+}
+.seg-tumbuh { background: var(--gain); }
+.seg-setor { background: var(--deposit); }
+.sumbu { display: flex; gap: 3px; margin-top: 0.3rem; }
+.sumbu span {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+.legend li { display: flex; align-items: center; gap: 0.5rem; }
+.swatch { width: 0.85rem; height: 0.85rem; border-radius: 2px; }
+.swatch-setor { background: var(--deposit); }
+.swatch-tumbuh { background: var(--gain); }
+.disclaimer {
+  margin: 1.25rem 0 0;
+  max-width: 60ch;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- 9. Gabung & footer ---------- */
+.join-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem 3rem;
+  align-items: end;
+}
+.join-grid .section-lead { margin-bottom: 1.5rem; }
+.address {
+  font-style: normal;
+  color: var(--ink-soft);
+  border-top: 1.5px solid var(--ink);
+  padding-top: 0.75rem;
+}
+.address strong { display: block; color: var(--ink); margin-bottom: 0.25rem; }
+
+.site-footer { border-top: 1px solid var(--rule); }
+.site-footer .wrap { padding-block: 1.5rem; }
+.site-footer p { margin: 0; font-size: 0.875rem; color: var(--ink-soft); }
+
+/* ---------- 10. Layar kecil ---------- */
+@media (max-width: 860px) {
+  .hero-grid, .about-grid, .calc, .join-grid { grid-template-columns: minmax(0, 1fr); }
+  .seal { max-width: 300px; }
+}
+@media (max-width: 640px) {
+  .program { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .figures { grid-template-columns: minmax(0, 1fr); }
+}
